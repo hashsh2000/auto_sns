@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'TwiStar') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -31,59 +31,39 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
 
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">メニュー1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">メニュー2</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">メニュー3</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">メニュー4</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">メニュー5</a>
+                        </li>
+                        <li class="nav-item">
+                            <!-- Authentication Links -->
+                            @guest
+                                <!-- @if (Route::has('login'))
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
+                                @endif -->
+                                <!-- @if (Route::has('register'))
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                @endif -->
+                            @else
+                                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    ログアウト
                                 </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        ログアウト
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <p id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    メニュー
-                                </p>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">項目1</a>
-                                    <a class="dropdown-item" href="#">項目2</a>
-                                    <a class="dropdown-item" href="#">項目3</a>
-                                    <a class="dropdown-item" href="#">項目4</a>
-                                    <a class="dropdown-item" href="#">項目5</a>
-                                    <a class="dropdown-item" href="#">項目6</a>
-                                </div>
-                            </li>
-                        @endguest
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                            @endguest
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -94,21 +74,37 @@
         </main>
     </div>
 
-    <footer class="bg-light py-3">
-        <div class="container">
-            <div class="row">
-            <div class="col-6">
-                <a href="#" class="text-decoration-none text-dark">
-                <i class="bi bi-line"></i>
-                LINEでお問い合わせ
-                </a>
-            </div>
-            <div class="col-6 text-end">
-                <a href="#" class="text-decoration-none text-dark">使い方ガイド</a>
-            </div>
-            </div>
+    <footer class="footer">
+        <div class="container text-center">
+        <p class="text-muted">©︎{{ config('app.name', 'TwiStar') }}</p>
         </div>
     </footer>
 
 </body>
+
+<style>
+    html {
+        position: relative;
+        min-height: 100%;
+    }
+    body {
+        margin-bottom: 60px;
+    }
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+        background-color: #312d2a;
+    }
+    .container {
+        width: auto;
+        max-width: 680px;
+        padding: 0 15px;
+    }
+    .container .text-muted {
+        margin: 20px 0;
+    }
+
+</style>
 </html>

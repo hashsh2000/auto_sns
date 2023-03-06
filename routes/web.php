@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DmTextController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+// DM機能
+Route::get('/dm/create/',               [DmTextController::class, 'create'])->name('dm.create');
+Route::post('/dm/form/create',          [DmTextController::class, 'form_create'])->name('dm.form.create');
+Route::get('/dm/edit/{dm_id}/',         [DmTextController::class, 'edit'])->name('dm.edit');
+Route::post('/dm/form/edit/{dm_id}/',   [DmTextController::class, 'form_edit'])->name('dm.form.edit');
+Route::get('/dm/{user_id}/',            [DmTextController::class, 'index'])->name('dm.index');

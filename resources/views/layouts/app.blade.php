@@ -31,38 +31,22 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
                     <ul class="navbar-nav mr-auto">
+                        @if( Auth::check() )
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">メニュー1</a>
+                            <a class="nav-link" href="{{ route('dm.index', ['user_id' => Auth::id()]) }}">DM設定</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">メニュー2</a>
                         </li>
+                        @endif
                         <li class="nav-item">
-                            <a class="nav-link" href="#">メニュー3</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">メニュー4</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">メニュー5</a>
-                        </li>
-                        <li class="nav-item">
-                            <!-- Authentication Links -->
-                            @guest
-                                <!-- @if (Route::has('login'))
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                @endif -->
-                                <!-- @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                @endif -->
-                            @else
+                            @if( Auth::check() )
                                 <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     ログアウト
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
-                            @endguest
+                            @endif
                         </li>
                     </ul>
                 </div>
@@ -104,6 +88,12 @@
     }
     .container .text-muted {
         margin: 20px 0;
+    }
+    .edit-btn {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(0, -50%);
     }
 
 </style>

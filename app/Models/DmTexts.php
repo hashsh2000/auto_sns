@@ -19,7 +19,7 @@ class DmTexts extends Model
 
     // カラム
     protected $fillable = [
-        'id', 'user_id', 'keyword_id', 'title', 'content','active_flg'
+        'user_id', 'keyword_id', 'title', 'content','active_flg'
     ];
 
     public static function cancel_activate_all(){

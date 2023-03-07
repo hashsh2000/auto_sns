@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DmTexts;
+use App\Models\Keywords;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DmTextController extends Controller
 {
@@ -26,7 +28,16 @@ class DmTextController extends Controller
     public function index($user_id)
     {
         $user_id = Auth::id();
-        $dm_list = DmTexts::where('user_id', $user_id)->orderBy('active_flg', 'desc')->orderBy('title', 'asc')->get();
+        $dm_list = DmTexts::join('keyword', 'dm_text.keyword_id', '=', 'keyword.id')
+        ->select(DB::raw(
+            'keyword.title as keyword_name,
+            IFNULL(keyword.deleted_at, 0) as keyword_deleted,
+            dm_text.*'
+            ))
+        ->where('dm_text.user_id', $user_id)
+        ->orderBy('dm_text.active_flg', 'desc')
+        ->orderBy('dm_text.title', 'asc')
+        ->get();
 
         return view('dm/index',['dm_list' => $dm_list]);
     }
@@ -37,8 +48,14 @@ class DmTextController extends Controller
      */
     public function create()
     {
+        // form用データ
         $action = 'create';
-        return view('dm/form',['action' => $action]);
+        $user_id = Auth::id();
+        $keyword_list = Keywords::where('user_id', $user_id)->get();
+        return view('dm/form',[
+            'action' => $action,
+            'keyword_list' => $keyword_list
+        ]);
     }
 
     /**
@@ -47,15 +64,22 @@ class DmTextController extends Controller
      */
     public function edit($dm_id)
     {
+        // form用データ
         $action = 'edit';
         $user_id = Auth::id();
+        $keyword_list = Keywords::where('user_id', $user_id)->get();
+
         $dm_data = DmTexts::where('id', $dm_id)->first();
 
         if($dm_data['user_id'] != $user_id){
             return redirect(route('dm.index', ['user_id' => $user_id]));
         }
         
-        return view('dm/form',['dm_data' => $dm_data, 'action' => $action]);
+        return view('dm/form',[
+            'action' => $action,
+            'keyword_list' => $keyword_list,
+            'dm_data' => $dm_data
+        ]);
     }
 
 

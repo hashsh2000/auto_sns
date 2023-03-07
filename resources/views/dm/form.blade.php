@@ -7,16 +7,18 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('フォーム') }}</div>
-        <div class="card-body">
           @if ($action == 'edit')
+        <div class="card-header">{{ __('DM送信内容 編集') }}</div>
+        <div class="card-body">
           <form method="POST" action="{{ route('dm.form.edit', ['dm_id' => @$dm_data['id']]) }}">
           @else
+        <div class="card-header">{{ __('DM送信内容 登録') }}</div>
+        <div class="card-body">
           <form method="POST" action="{{ route('dm.form.create') }}">
           @endif
             @csrf
             <div class="mb-3">
-              <label for="title" class="form-label">{{ __('タイトル') }}</label>
+              <label for="title" class="form-label">{{ __('DM名') }}</label>
               <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ @$dm_data['title'] }}" required autofocus>
               @error('title')
                 <span class="invalid-feedback" role="alert">
@@ -25,7 +27,7 @@
               @enderror
             </div>
             <div class="mb-3">
-              <label for="keyword" class="form-label">{{ __('キーワード') }}</label>
+              <label for="keyword" class="form-label">{{ __('検索ワード') }}</label>
               <select class="form-select @error('keyword') is-invalid @enderror" id="keyword" name="keyword" required>
                 @if ($action == 'create')
                 <option value="" selected disabled hidden>{{ __('選択してください') }}</option>
@@ -43,7 +45,7 @@
               @enderror
             </div>
             <div class="mb-3">
-              <label for="content" class="form-label">{{ __('本文') }}</label>
+              <label for="content" class="form-label">{{ __('送信内容') }}</label>
               <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" style="height: 300px;"; required>{{ @$dm_data['content'] }}</textarea>
               @error('content')
                 <span class="invalid-feedback" role="alert">

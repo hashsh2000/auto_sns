@@ -30,8 +30,8 @@ Route::post('/dm/form/create',          [DmTextController::class, 'form_create']
 Route::get('/dm/edit/{dm_id}/',         [DmTextController::class, 'edit'])->name('dm.edit');
 Route::post('/dm/form/edit/{dm_id}/',   [DmTextController::class, 'form_edit'])->name('dm.form.edit');
 // キーワード検索機能
-Route::get('/keyword/list/{user_id}/',      [KeywordController::class, 'index'])->name('keyword.index');
-Route::get('/keyword/create/',              [KeywordController::class, 'create'])->name('keyword.create');
-Route::post('/keyword/form/create',         [KeywordController::class, 'form_create'])->name('keyword.form.create');
-Route::get('/keyword/edit/{keyword_id}/',   [KeywordController::class, 'edit'])->name('keyword.edit');
-Route::post('/keyword/form/edit/{dm_id}/',  [KeywordController::class, 'form_edit'])->name('keyword.form.edit');
+Route::get('/keyword/list/{user_id}/',          [KeywordController::class, 'index'])->name('keyword.index');
+Route::get('/keyword/create/',                  [KeywordController::class, 'create'])->name('keyword.create');
+Route::post('/keyword/form/create',             [KeywordController::class, 'form_create'])->name('keyword.form.create');
+Route::get('/keyword/edit/{keyword_id}/',       [KeywordController::class, 'edit'])->name('keyword.edit');
+Route::post('/keyword/form/edit/{keyword_id}/', [KeywordController::class, 'form_edit'])->name('keyword.form.edit');

@@ -7,16 +7,18 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('フォーム') }}</div>
+      @if ($action == 'edit')
+        <div class="card-header">{{ __('ターゲット検索ワード 編集') }}</div>
         <div class="card-body">
-          @if ($action == 'edit')
-          <form method="POST" action="{{ route('keyword.form.edit', ['dm_id' => @$keyword_data['id']]) }}">
+          <form method="POST" action="{{ route('keyword.form.edit', ['keyword_id' => @$keyword_data['id']]) }}">
           @else
+        <div class="card-header">{{ __('ターゲット検索ワード 登録') }}</div>
+        <div class="card-body">
           <form method="POST" action="{{ route('keyword.form.create') }}">
           @endif
             @csrf
             <div class="mb-3">
-              <label for="title" class="form-label">{{ __('キーワード名') }}</label>
+              <label for="title" class="form-label">{{ __('検索ワード名') }}</label>
               <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ @$keyword_data['title'] }}" required autofocus>
               @error('title')
                 <span class="invalid-feedback" role="alert">

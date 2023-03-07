@@ -27,10 +27,14 @@
             <div class="mb-3">
               <label for="keyword" class="form-label">{{ __('キーワード') }}</label>
               <select class="form-select @error('keyword') is-invalid @enderror" id="keyword" name="keyword" required>
+                @if ($action == 'create')
                 <option value="" selected disabled hidden>{{ __('選択してください') }}</option>
-                <option value="1">{{ __('オプション1') }}</option>
-                <option value="2">{{ __('オプション2') }}</option>
-                <option value="3">{{ __('オプション3') }}</option>
+                @endif
+                @foreach ($keyword_list as $keyword)
+                  <option value="{{ $keyword->id }}" @if (@$dm_data['keyword_id'] == $keyword->id) selected @endif>
+                    {{ $keyword->title }}
+                  </option>
+                @endforeach
               </select>
               @error('keyword')
                 <span class="invalid-feedback" role="alert">
@@ -49,9 +53,11 @@
             </div>
             <input type="hidden" id="active_flg" name="active_flg" value="{{ @$dm_data['active_flg'] }}">
             <button type="submit" class="btn btn-primary" name="save" value="1">{{ __('保存') }}</button>
+            @if ( @$dm_data['active_flg'] != 1)
             <button type="submit" class="btn btn-info" name="active" value="1" onclick="return confirm('この設定を有効化しますか？')">{{ __('有効化') }}</button>
             @if ($action == 'edit')
             <button type="submit" class="btn btn-danger" name="delete" value="1" onclick="return confirm('この設定を削除しますか？')">{{ __('削除') }}</button>
+            @endif
             @endif
           </form>
         </div>

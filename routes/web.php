@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DmTextController;
 use App\Http\Controllers\KeywordController;
+use App\Http\Controllers\BillingController;
 
 
 /*
@@ -35,3 +36,6 @@ Route::get('/keyword/create/',                  [KeywordController::class, 'crea
 Route::post('/keyword/form/create',             [KeywordController::class, 'form_create'])->name('keyword.form.create');
 Route::get('/keyword/edit/{keyword_id}/',       [KeywordController::class, 'edit'])->name('keyword.edit');
 Route::post('/keyword/form/edit/{keyword_id}/', [KeywordController::class, 'form_edit'])->name('keyword.form.edit');
+// 支払い完了通知
+Route::get('/billing/index/',                   [BillingController::class, 'index'])->name('billing.index');
+Route::post('/billing/form/create',             [BillingController::class, 'form_create'])->name('billing.form.create');

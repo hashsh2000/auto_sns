@@ -7,7 +7,9 @@
     <ul class="list-group">
         <li class="list-group-item">
             <h3>ダッシュボード</h3>
-            <p>ここにダッシュボードの内容を表示します。</p>
+            @if(mb_strlen($payment_notice))
+            <p class='text-danger'>{{ $payment_notice }}</p>
+            @endif
         </li>
     </ul>
     <ul class="list-group mt-3">
